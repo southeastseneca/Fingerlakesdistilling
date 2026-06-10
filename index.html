@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finger Lakes Distilling | South East Seneca</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Epilogue:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #323d41;
+      --amber: #eeaf70;
+      --slate: #4e6d77;
+      --cream: #f7f4f0;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Epilogue', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      overflow: hidden;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(50,61,65,.15) 0%, rgba(50,61,65,.65) 100%);
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 36px;
+      left: 40px;
+      right: 40px;
+    }
+    .hero-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      text-shadow: 0 2px 12px rgba(0,0,0,.4);
+    }
+    .hero-tagline {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,.88);
+      margin-top: 8px;
+    }
+
+    /* ── QUICK BAR ── */
+    .quick-bar {
+      background: var(--navy);
+      padding: 0 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .quick-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px 14px 0;
+      margin-right: 24px;
+      color: var(--cream);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .quick-item:hover { color: var(--amber); border-bottom-color: var(--amber); }
+    .quick-item svg { flex-shrink: 0; opacity: .75; }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 40px;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .body-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #3a4a4f;
+      margin-bottom: 16px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(50,61,65,.12);
+      margin: 36px 0;
+    }
+
+    /* ── SPIRITS GRID ── */
+    .spirits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .spirit-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+      border: 1px solid rgba(50,61,65,.08);
+    }
+    .spirit-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(238,175,112,.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .spirit-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px;
+    }
+    .spirit-desc {
+      font-size: 12px;
+      color: #6a7f86;
+      line-height: 1.5;
+    }
+
+    /* ── EXPERIENCES ── */
+    .experience-list { margin-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+    .experience-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 16px;
+      border-left: 3px solid var(--amber);
+    }
+    .experience-item svg { flex-shrink: 0; margin-top: 1px; }
+    .experience-item h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+      letter-spacing: .04em;
+    }
+    .experience-item p { font-size: 13px; color: #5a6e74; line-height: 1.55; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+    .card {
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(50,61,65,.09);
+    }
+    .card-header {
+      background: var(--navy);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-header span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .card-body { padding: 18px; }
+
+    /* Hours */
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(50,61,65,.07);
+      color: #3a4a4f;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { font-weight: 600; color: var(--navy); }
+    .hours-row.extended .time { color: var(--slate); font-weight: 600; }
+
+    /* Contact */
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #3a4a4f;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(50,61,65,.07);
+      text-decoration: none;
+    }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-row:hover { color: var(--slate); }
+    a.contact-row { color: var(--slate); font-weight: 500; }
+
+    /* CTA button */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      background: var(--amber);
+      color: var(--navy);
+      text-align: center;
+      padding: 13px;
+      border-radius: 6px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-top: 4px;
+      transition: background .2s;
+    }
+    .btn-primary:hover { background: #e8a05e; }
+
+    .btn-outline {
+      display: block;
+      width: 100%;
+      border: 2px solid var(--navy);
+      color: var(--navy);
+      text-align: center;
+      padding: 11px;
+      border-radius: 6px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-top: 10px;
+      transition: background .2s, color .2s;
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+    /* tags */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      background: rgba(78,109,119,.1);
+      color: var(--slate);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── EVENTS STRIP ── */
+    .events-strip {
+      background: var(--navy);
+      padding: 40px;
+    }
+    .events-strip .section-label { color: var(--amber); }
+    .events-strip .section-title { color: var(--white); margin-bottom: 24px; }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .event-card {
+      background: rgba(255,255,255,.07);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .event-date {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+    .event-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .event-desc { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #222d30;
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-brand {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,.5);
+      letter-spacing: .06em;
+    }
+    .footer-brand strong { color: rgba(255,255,255,.8); }
+    .footer-link {
+      font-size: 12px;
+      color: var(--amber);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-link:hover { text-decoration: underline; }
+
+    @media (max-width: 760px) {
+      .page-wrap { grid-template-columns: 1fr; padding: 32px 20px; }
+      .spirits-grid { grid-template-columns: repeat(2, 1fr); }
+      .events-grid { grid-template-columns: 1fr; }
+      .quick-bar { padding: 0 20px; }
+      .hero-text { left: 20px; right: 20px; }
+      .events-strip, .footer { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="Hero.jpeg" alt="Finger Lakes Distilling overlooking Seneca Lake" />
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Distillery · Burdett, NY</div>
+    <div class="hero-title">Finger Lakes Distilling</div>
+    <div class="hero-tagline">The region's first stand-alone distillery — handcrafting spirits above Seneca Lake since 2007</div>
+  </div>
+</div>
+
+<!-- QUICK BAR -->
+<div class="quick-bar">
+  <a class="quick-item" href="https://fingerlakesdistilling.com" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    Website
+  </a>
+  <a class="quick-item" href="tel:6075465510">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l.82-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.6 16l.32.92z"/></svg>
+    (607) 546-5510
+  </a>
+  <a class="quick-item" href="https://maps.google.com/?q=4676+NYS+Route+414+Burdett+NY+14818" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    4676 NYS Rt 414, Burdett
+  </a>
+  <a class="quick-item" href="https://fingerlakesdistillingbottles.square.site/" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    Online Bottle Shop
+  </a>
+  <a class="quick-item" href="https://fingerlakesdistilling.com/events/" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Events
+  </a>
+</div>
+
+<!-- MAIN CONTENT + SIDEBAR -->
+<div class="page-wrap">
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- About -->
+    <div class="section-label">About</div>
+    <h2 class="section-title">A Pioneer in New York State Spirits</h2>
+    <p class="body-text">
+      Overlooking the shimmering waters of Seneca Lake, Finger Lakes Distilling has been crafting award-winning spirits since 2007 — making it the region's first stand-alone distillery. Founded by Brian McKenzie and Thomas Earl McKenzie, the two combined a background in finance with deep expertise in winemaking, brewing, and traditional distilling to build something the Finger Lakes had never seen before.
+    </p>
+    <p class="body-text">
+      As a New York State Farm Distillery, every bottle starts close to home. Locally grown grains and farm-fresh fruits flow through two copper stills — a 350-gallon German-made pot still and a 25-foot continuous still — producing a portfolio of handcrafted whiskeys, vodka, gin, brandy, grappa, and liqueurs that have put this stretch of Seneca Lake on the national spirits map.
+    </p>
+
+    <hr class="divider" />
+
+    <!-- Spirits -->
+    <div class="section-label">What's in the Glass</div>
+    <h2 class="section-title">Award-Winning Spirits Portfolio</h2>
+    <p class="body-text">From grain-to-glass McKenzie Whiskey to the locally inspired Seneca Drums Gin, every expression at FLD is made with intention — no shortcuts, no extracts, just real ingredients and time-honored technique.</p>
+
+    <div class="spirits-grid">
+      <div class="spirit-card">
+        <div class="spirit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="1.8"><path d="M8 3v2M16 3v2M7 5h10l1 7H6L7 5z"/><path d="M6 12v7a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-7"/></svg>
+        </div>
+        <div class="spirit-name">McKenzie Whiskey</div>
+        <div class="spirit-desc">Bottled-in-bond bourbon, rye, and Empire Rye — aged in new charred oak and finished in local wine casks</div>
+      </div>
+      <div class="spirit-card">
+        <div class="spirit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="1.8"><path d="M12 2C8 2 5 6 5 10c0 2 1 4 2 5l1 7h8l1-7c1-1 2-3 2-5 0-4-3-8-7-8z"/></svg>
+        </div>
+        <div class="spirit-name">Seneca Drums Gin</div>
+        <div class="spirit-desc">Named New York's Best Spirit — a distinctive gin crafted with locally sourced botanicals</div>
+      </div>
+      <div class="spirit-card">
+        <div class="spirit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="1.8"><path d="M12 2v20M5 7l7-5 7 5M5 17l7 5 7-5"/></svg>
+        </div>
+        <div class="spirit-name">Vintner's Vodka</div>
+        <div class="spirit-desc">Distilled from Finger Lakes grapes — smooth, elegant, with unmistakable local character</div>
+      </div>
+      <div class="spirit-card">
+        <div class="spirit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="spirit-name">Brandy & Grappa</div>
+        <div class="spirit-desc">Pear, apple, and grape brandies made with local fruit — less sweet, more expressive than the national norm</div>
+      </div>
+      <div class="spirit-card">
+        <div class="spirit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="1.8"><path d="M12 22s-8-6-8-13a8 8 0 0 1 16 0c0 7-8 13-8 13z"/></svg>
+        </div>
+        <div class="spirit-name">Liqueurs</div>
+        <div class="spirit-desc">Fruit-soaked liqueurs made with real, whole ingredients — never extracts or artificial flavors</div>
+      </div>
+      <div class="spirit-card">
+        <div class="spirit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div class="spirit-name">Glen Thunder</div>
+        <div class="spirit-desc">Corn whiskey with a bold, distinctly New York character — unaged and unapologetic</div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Experiences -->
+    <div class="section-label">Visit</div>
+    <h2 class="section-title">More Than a Tasting Room</h2>
+    <p class="body-text">The Tippling House is your gateway to the full Finger Lakes Distilling experience — flights, cocktails, light bites, and sweeping lake views, all under one roof. But there's plenty more to explore.</p>
+
+    <div class="experience-list">
+      <div class="experience-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <div>
+          <h4>Tasting Flights & Cocktails</h4>
+          <p>Walk up any day, no reservation needed for groups under 12. Sip a flight or settle in for a craft cocktail while watching production happen right through the glass.</p>
+        </div>
+      </div>
+      <div class="experience-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div>
+          <h4>Distillery Tours</h4>
+          <p>Get an up-close look at the two copper stills, the production process, and the history behind one of New York's most celebrated craft spirits operations.</p>
+        </div>
+      </div>
+      <div class="experience-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="2"><path d="M12 22s-8-6-8-13a8 8 0 0 1 16 0c0 7-8 13-8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+        <div>
+          <h4>Make Your Own Gin</h4>
+          <p>A hands-on workshop for groups of 1–8. Blend your own botanicals, distill your personal recipe, and walk away with a custom bottle of gin you made yourself.</p>
+        </div>
+      </div>
+      <div class="experience-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div>
+          <h4>Thief & Mallet Club</h4>
+          <p>The ultimate insider experience — join the club to make your own whiskey from grain to bottle, with barrel selection, blending sessions, and exclusive member events.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Hours -->
+    <div class="card">
+      <div class="card-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Hours</span>
+      </div>
+      <div class="card-body">
+        <div class="hours-row"><span class="day">Monday</span><span class="time">11am – 6pm</span></div>
+        <div class="hours-row"><span class="day">Tuesday</span><span class="time">11am – 6pm</span></div>
+        <div class="hours-row"><span class="day">Wednesday</span><span class="time">11am – 6pm</span></div>
+        <div class="hours-row extended"><span class="day">Thursday</span><span class="time">11am – 8pm</span></div>
+        <div class="hours-row extended"><span class="day">Friday</span><span class="time">11am – 8pm</span></div>
+        <div class="hours-row extended"><span class="day">Saturday</span><span class="time">11am – 8pm</span></div>
+        <div class="hours-row"><span class="day">Sunday</span><span class="time">11am – 6pm</span></div>
+        <p style="font-size:12px;color:#888;margin-top:10px;">Open year-round. Reservations required for groups of 12+.</p>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="card">
+      <div class="card-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Find Us</span>
+      </div>
+      <div class="card-body">
+        <a class="contact-row" href="https://maps.google.com/?q=4676+NYS+Route+414+Burdett+NY+14818" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4e6d77" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          4676 NYS Rt 414, Burdett NY 14818
+        </a>
+        <a class="contact-row" href="tel:6075465510">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4e6d77" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l.82-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.6 16l.32.92z"/></svg>
+          (607) 546-5510
+        </a>
+        <a class="contact-row" href="mailto:info@fingerlakesdistilling.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4e6d77" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@fingerlakesdistilling.com
+        </a>
+        <a class="contact-row" href="https://www.facebook.com/fingerlakesdistilling/" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4e6d77" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+        <a class="contact-row" href="https://www.instagram.com/flxdistilling/" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4e6d77" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @flxdistilling
+        </a>
+        <a class="btn-primary" href="https://fingerlakesdistilling.com/discover-explore/" target="_blank">Plan Your Visit</a>
+        <a class="btn-outline" href="https://fingerlakesdistillingbottles.square.site/" target="_blank">Shop Online</a>
+      </div>
+    </div>
+
+    <!-- Amenities -->
+    <div class="card">
+      <div class="card-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#eeaf70" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Amenities</span>
+      </div>
+      <div class="card-body">
+        <div class="tag-row">
+          <span class="tag">Dog Friendly</span>
+          <span class="tag">Handicap Accessible</span>
+          <span class="tag">Lake Views</span>
+          <span class="tag">Bottle Shop</span>
+          <span class="tag">Cocktails</span>
+          <span class="tag">Light Food</span>
+          <span class="tag">Merchandise</span>
+          <span class="tag">Group Events</span>
+          <span class="tag">21+ to Taste</span>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- EVENTS STRIP -->
+<div class="events-strip">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">Upcoming</div>
+    <h2 class="section-title">Events at FLD</h2>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-date">Seasonal</div>
+        <div class="event-name">Make Your Own Gin Workshop</div>
+        <div class="event-desc">A hands-on private experience for up to 8 guests. Blend your botanicals, distill, and bottle your creation.</div>
+      </div>
+      <div class="event-card">
+        <div class="event-date">Member Events</div>
+        <div class="event-name">Thief & Mallet Club</div>
+        <div class="event-desc">From barrel selection to blending and bottling — the full whiskey-making journey, guided by the FLD team.</div>
+      </div>
+      <div class="event-card">
+        <div class="event-date">Year-Round</div>
+        <div class="event-name">Distillery Tours & Tastings</div>
+        <div class="event-desc">See the copper stills up close, taste the lineup, and take home a bottle from the on-site bottle shop.</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:rgba(255,255,255,.5);margin-top:20px;">
+      For the latest events, check <a href="https://fingerlakesdistilling.com/events/" target="_blank" style="color:var(--amber);text-decoration:none;">fingerlakesdistilling.com/events</a> or follow <a href="https://www.facebook.com/fingerlakesdistilling/" target="_blank" style="color:var(--amber);text-decoration:none;">@fingerlakesdistilling</a> on Facebook.
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">
+    <strong>Finger Lakes Distilling</strong> &nbsp;·&nbsp; 4676 NYS Rt 414, Burdett NY &nbsp;·&nbsp; (607) 546-5510
+  </div>
+  <a class="footer-link" href="https://southeastseneca.com" target="_blank">South East Seneca Member ↗</a>
+</div>
+
+</body>
+</html>
